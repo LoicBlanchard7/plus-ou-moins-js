@@ -26,3 +26,18 @@
     margin-top: 10px;
     width: 100%;
 }
+
+#saveScore {
+    margin-top: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightcyan;
+}
+
+#highscore {
+    margin-top: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightcoral;
+}
+
