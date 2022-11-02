@@ -1,4 +1,4 @@
-var charNameMax = 12;
+var charNameMax = 10;
 var maxScoreSave = 10;
 var trialsNumberMax = 0;
 var trialsNumber = 0;
@@ -14,7 +14,7 @@ var butonSaveScore = document.getElementById("butonSaveScore");
 var butonDeleteScore = document.getElementById("butonDeleteScore");
 
 var resultat = document.getElementById("message");
-var randomNumber = Math.floor(Math.random() * 2) + 1;
+var randomNumber = Math.floor(Math.random() * 100) + 1;
 butonSaveScore.disabled = true;
 var listScore = document.getElementById("score");
 
@@ -130,12 +130,12 @@ function takeName() {
     var nouveauMessage = "";
     nouveauMessage = nameTemp;
 
-    if (nameTemp != null && nameTemp != ' ') {
+    if (nameTemp != null && nameTemp != ' ' && nameTemp.length < charNameMax) {
         nouveauMessage = "Votre score est enregistré ! <br> Pour rejouer, appuyez sur F5 ou appuyez sur Rejouer.";
         butonSaveScore.disabled = true;
         saveScore();
     } else {
-        nouveauMessage = "Entre un pseudo valide !";
+        nouveauMessage = "Entre un pseudo valide ! (Maximum " + charNameMax + " caractères.";
     }
 
     messageName.innerHTML = nouveauMessage;
@@ -157,6 +157,7 @@ function afficheHighscore() {
     listScore.innerHTML = "";
 
     let sortScore = [];
+    let maxHighscore;
 
     for (let i = 0; i < localStorage.length; i++) {
         sortScore.push([localStorage.key(i), localStorage.getItem(localStorage.key(i))]);
@@ -166,7 +167,13 @@ function afficheHighscore() {
         return a[1] - b[1];
     });
 
-    for (let i = 0; i < sortScore.length; i++) {
+    if(sortScore.length < maxScoreSave) {
+        maxHighscore = sortScore.length;
+    } else {
+        maxHighscore = maxScoreSave;
+    }
+
+    for (let i = 0; i < maxHighscore; i++) {
         listScore.innerHTML += i + 1 + " - Pseudo : " + sortScore[i][0] + " - Score : " + sortScore[i][1] + "<br>";
     }
 
@@ -175,6 +182,4 @@ function afficheHighscore() {
             place.innerHTML = "Vous êtes à la place numéro : " + (i + 1);
         }
     }
-
-    console.log(sortScore);
 }
