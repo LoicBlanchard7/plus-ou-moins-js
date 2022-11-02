@@ -21,6 +21,7 @@ var listScore = document.getElementById("score");
 var butonChooseDifficulty = document.getElementById("butonChooseDifficulty");
 var form = document.getElementById("difficultyCadre");
 
+var butonReload = document.getElementById("butonReload");
 
 boutonValider.disabled = true;
 
@@ -34,6 +35,13 @@ boutonValider.onclick = function () {
     afficheMessage();
 }
 
+butonReload.onclick = function () {
+    location.reload();
+}
+
+function viewButonReload() {
+    butonReload.type="button";
+}
 
 form.addEventListener("submit", function (event) {
     var data = new FormData(form);
@@ -87,7 +95,7 @@ function afficheMessage() {
             nouveauMessage = "Erreur de saisie";
         } else {
             trialsNumber++;
-
+            essais.innerHTML = "Il vous reste : " + (trialsNumberMax - trialsNumber) + " essais.";
             switch (compare(proposition)) {
                 case -1:
                     nouveauMessage = "C'est moins";
@@ -123,7 +131,7 @@ function takeName() {
     nouveauMessage = nameTemp;
 
     if (nameTemp != null && nameTemp != ' ') {
-        nouveauMessage = "Votre score est enregistré ! <br> Pour rejouer, appuyer sur F5.";
+        nouveauMessage = "Votre score est enregistré ! <br> Pour rejouer, appuyez sur F5 ou appuyez sur Rejouer.";
         butonSaveScore.disabled = true;
         saveScore();
     } else {
@@ -137,6 +145,7 @@ function takeName() {
 function saveScore() {
     localStorage.setItem(name.value, trialsNumber);
     afficheHighscore();
+    viewButonReload();
 }
 
 function deleteScore() {
