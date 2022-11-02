@@ -15,59 +15,60 @@ var butonDeleteScore = document.getElementById("butonDeleteScore");
 
 var resultat = document.getElementById("message");
 var randomNumber = Math.floor(Math.random() * 2) + 1;
-butonSaveScore.disabled=true;
+butonSaveScore.disabled = true;
 var listScore = document.getElementById("score");
+
+var butonChooseDifficulty = document.getElementById("butonChooseDifficulty");
+var form = document.getElementById("difficultyCadre");
+
+
+boutonValider.disabled = true;
+
+afficheHighscore();
 
 butonDeleteScore.onclick = function () {
     deleteScore();
 }
 
-var butonChooseDifficulty = document.getElementById("butonChooseDifficulty");
-var form = document.getElementById("difficultyCadre");
-
-boutonValider.disabled = true;
-
-
 boutonValider.onclick = function () {
     afficheMessage();
 }
 
-form.addEventListener("submit", function(event) {
+
+form.addEventListener("submit", function (event) {
     var data = new FormData(form);
     var output = "";
     for (const entry of data) {
-      output = entry[1];
+        output = entry[1];
     };
 
-    switch(output) {
+    switch (output) {
         case "":
             logDifficulty.innerHTML = "Choissisez un niveau de difficulté valide !";
         case "Facile":
             trialsNumberMax = 15;
             difficultySelect();
             logDifficulty.innerHTML = "Niveau de difficulté choisit : facile !";
-        break;
+            break;
         case "Moyen":
             trialsNumberMax = 11;
             difficultySelect();
             logDifficulty.innerHTML = "Niveau de difficulté choisit : moyen !";
 
-        break;
+            break;
         case "Difficile":
             trialsNumberMax = 8;
             difficultySelect();
             logDifficulty.innerHTML = "Niveau de difficulté choisit : difficile !";
-        break;
+            break;
     }
 
     event.preventDefault();
-  }, false);
+}, false);
 
-butonSaveScore.onclick = function() {
+butonSaveScore.onclick = function () {
     takeName();
 }
-
-afficheHighscore();
 
 function compare(value) {
     var retour = 0;
@@ -81,46 +82,33 @@ function afficheMessage() {
     var nouveauMessage = "";
     var trialsRemaining = trialsNumberMax - trialsNumber;
 
-    if(trialsRemaining>1) {
+    if (trialsRemaining > 1) {
         if (isNaN(proposition)) {
             nouveauMessage = "Erreur de saisie";
         } else {
             trialsNumber++;
-            essais.innerHTML = "Il vous reste : " + (trialsNumberMax - trialsNumber) + " essais.";
+
             switch (compare(proposition)) {
                 case -1:
                     nouveauMessage = "C'est moins";
                     break;
                 case 0:
-                    nouveauMessage = "Bravo ! Vous avez trouvé en : " + trialsNumber + " essai(s).";
+                    nouveauMessage = "Bravo ! Vous avez trouvé en : " + trialsNumber + " essai(s). <br> Vous pouvez maintenant enregistrer votre Score !";
+                    butonSaveScore.disabled = false;
+                    boutonValider.disabled = true;
                     break;
                 case 1:
                     nouveauMessage = "C'est plus";
                     break;
             }
         }
+        entree.value = "";
+        resultat.innerHTML = nouveauMessage;
     } else {
         trialsNumber++;
-        boutonValider.disabled = true;
+        boutonValider.disabled = false;
         nouveauMessage = "Perdu ! Vous avez utilisé tout vos essais.";
-        switch (compare(proposition)) {
-            case -1:
-                nouveauMessage = "C'est moins";
-                break;
-            case 0:
-                nouveauMessage = "Bravo ! Vous avez trouvé en : " + trialsNumber + " essai(s). <br> Vous pouvez maintenant enregistrer votre Score !";
-                butonSaveScore.disabled=false;
-
-                break;
-            case 1:
-                nouveauMessage = "C'est plus";
-                break;
-        }
     }
-
-        
-    entree.value = "";
-    resultat.innerHTML = nouveauMessage;
 }
 
 function difficultySelect() {
@@ -134,14 +122,16 @@ function takeName() {
     var nouveauMessage = "";
     nouveauMessage = nameTemp;
 
-    if (nameTemp!= null && nameTemp != ' ') {
-        nouveauMessage = "Votre score est enregistré !";
+    if (nameTemp != null && nameTemp != ' ') {
+        nouveauMessage = "Votre score est enregistré ! <br> Pour rejouer, appuyer sur F5.";
+        butonSaveScore.disabled = true;
         saveScore();
     } else {
         nouveauMessage = "Entre un pseudo valide !";
     }
 
     messageName.innerHTML = nouveauMessage;
+    name.value = "";
 }
 
 function saveScore() {
@@ -159,25 +149,23 @@ function afficheHighscore() {
 
     let sortScore = [];
 
-    for( let i = 0; i < localStorage.length; i++){
+    for (let i = 0; i < localStorage.length; i++) {
         sortScore.push([localStorage.key(i), localStorage.getItem(localStorage.key(i))]);
     }
 
-    sortScore.sort(function(a, b) {
+    sortScore.sort(function (a, b) {
         return a[1] - b[1];
     });
 
-    for( let i = 0; i < sortScore.length; i++){
-        listScore.innerHTML += i+1 + " - Pseudo : " + sortScore[i][0] + " - Score : " + sortScore[i][1] + "<br>";
+    for (let i = 0; i < sortScore.length; i++) {
+        listScore.innerHTML += i + 1 + " - Pseudo : " + sortScore[i][0] + " - Score : " + sortScore[i][1] + "<br>";
     }
 
-    for( let i = 0; i < sortScore.length; i++){
-        if(sortScore[i][0] == name.value && sortScore[i][1] == trialsNumber) {
-            place.innerHTML = "Vous êtes à la place numéro : " + (i+1);
+    for (let i = 0; i < sortScore.length; i++) {
+        if (sortScore[i][0] == name.value && sortScore[i][1] == trialsNumber) {
+            place.innerHTML = "Vous êtes à la place numéro : " + (i + 1);
         }
-
     }
 
     console.log(sortScore);
-
 }
