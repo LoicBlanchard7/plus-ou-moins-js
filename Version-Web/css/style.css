@@ -3,7 +3,26 @@
 }
 
 #cadre {
+    margin-top: 20px;
     border: 1px solid black;
     text-align: center;
     background-color: lightblue;
+}
+
+#difficultyCadre {
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightsalmon;
+    font-size: larger;
+}
+
+#difficultyCadre > div > section {
+    display: inline-block;
+    text-align: center;
+    margin-left: 30px;
+}
+
+#butonChooseDifficulty {
+    margin-top: 10px;
+    width: 100%;
 }

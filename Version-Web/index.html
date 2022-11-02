@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8"/>
-<title>Jeu du Plus ou Moins en Js !</title>
-<script type="module" src="js/script.js"></script>
-<link rel="stylesheet" href="css/style.css"></stylesheet>
- 	
- </head>
+    <meta charset="UTF-8" />
+    <title>Jeu du Plus ou Moins en JS !</title>
+    <script type="module" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    </stylesheet>
+
+</head>
+
 <body>
     <div class="center">
         <h1>Jeu du Plus ou Moins</h1>
-	    <p>Trouvez le nombre aléatoire entre 1 et 100 !</p>
+        <p>Trouvez le nombre aléatoire entre 1 et 100 !</p>
     </div>
+
+    <form id="difficultyCadre">
+        <p>Veuillez choisir le niveau de difficulté :</p>
+        <div>
+            <section>
+                <input type="radio" id="difficultyChoice1" name="difficulty" value="Facile">
+                <label for="difficultyChoice1">Facile (15 essais)</label>
+            </section>
+
+            <section>
+                <input type="radio" id="difficultyChoice2" name="difficulty" value="Moyen">
+                <label for="difficultyChoice2">Moyen (11 essais)</label>
+            </section>
+
+            <section>
+                <input type="radio" id="difficultyChoice3" name="difficulty" value="Difficile">
+                <label for="difficultyChoice3">Difficile (8 essais)</label>
+            </section>
+
+            <p id="logDifficulty">
+            </p>
+
+            <button id="butonChooseDifficulty" type="submit">Choisir</button>
+        </div>
+    </form>
     
-	
+
+
     <div id="cadre">
-		<p>Proposition du nombre : <input id="enter" type="text" />
-		<input id="butonValid" type="button" value="Valider" /></p>
-		<p>Résultat :</p>
+        <p>Proposition du nombre : <input id="enter" type="text" />
+            <input id="butonValid" type="button" value="Valider" />
+        </p>
+        <p id="essais"></p>
+        <p>Résultat :</p>
         <p id="message"></p>
-	</div>
+    </div>
 
 </body>
 
