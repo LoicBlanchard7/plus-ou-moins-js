@@ -1,3 +1,4 @@
+var trialsNumber = 0;
 var entree = document.getElementById("enter");
 var boutonValider = document.getElementById("butonValid");
 var resultat = document.getElementById("message");
@@ -20,12 +21,13 @@ function afficheMessage() {
     if (isNaN(proposition)) {
         nouveauMessage = "Erreur de saisie";
     } else {
+        trialsNumber++;
         switch (compare(proposition)) {
             case -1:
                 nouveauMessage = "C'est moins";
                 break;
             case 0:
-                nouveauMessage = "Bravo !";
+                nouveauMessage = "Bravo ! Vous avez trouvé en : " + trialsNumber + " essai(s).";
                 break;
             case 1:
                 nouveauMessage = "C'est plus";
