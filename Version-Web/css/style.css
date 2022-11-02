@@ -7,3 +7,18 @@
     text-align: center;
     background-color: lightblue;
 }
+
+#saveScore {
+    margin-top: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightcyan;
+}
+
+#highscore {
+    margin-top: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightcoral;
+}
+
