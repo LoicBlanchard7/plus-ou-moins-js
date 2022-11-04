@@ -1,0 +1,10 @@
+=============== Nombres maximums de scores enregistrés ===============
+10
+================= Nombre maximum de caractères pseudo ================
+12
+===================== Nombres d’essais maximums difficulté : FACILE ======================
+15
+===================== Nombres d’essais maximums difficulté : Moyenne ======================
+12
+===================== Nombres d’essais maximums difficulté : Difficile ======================
+8
